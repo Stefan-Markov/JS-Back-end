@@ -1,0 +1,11 @@
+{
+  "cats": [
+    {
+      "id": "1",
+      "name": "Mami",
+      "description": "May seem fat and lazy, but will fight for food and attention",
+      "upload": "./images/fatty.jpeg",
+      "breed": "Street Overlord"
+    }
+  ]
+}

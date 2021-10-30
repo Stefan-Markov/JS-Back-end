@@ -1,0 +1,19 @@
+node_modules
+
+# Ignore all txt files
+*.txt
+
+# Track "file1.txt" even if all other txt files are ignored
+!file1.txt
+
+# Ignore a file called "credentials" in the current directory
+/credentials
+
+# Ignore all files in any directory named "logs"
+logs/
+
+# ignore all txt files in the "logs" folder, but not "logs/apache/log.txt"
+logs/*.txt
+
+# ignore all ".txt" files in the "logs" directory and any of its subdirectories
+logs/**/*.txt

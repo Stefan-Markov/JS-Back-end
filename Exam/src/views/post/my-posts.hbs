@@ -1,0 +1,18 @@
+<main>
+    <section id="my-posts">
+        <h1>My post.</h1>
+        <div class="my-container">
+            {{#each posts}}
+                {{> myPost}}
+            {{else}}
+                <div class="no-posts">
+                    <div class="no-posts-img">
+                        <img src="/static/img/bear.jpg" alt="image_nature_3">
+                    </div>
+                    <p class="no-offer">There are no own posts yet...</p>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+</main>
+

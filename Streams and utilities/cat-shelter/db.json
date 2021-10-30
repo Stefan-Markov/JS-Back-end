@@ -1,0 +1,32 @@
+{
+  "cats": [
+    {
+      "name": "Navcho",
+      "description": "asdasd",
+      "breed": "Fluffy Cat"
+    },
+    {
+      "name": "Gosho",
+      "description": "asdasd",
+      "breed": "Fluffy Cat"
+    },
+    {
+      "name": "Stamat",
+      "description": "sdasd",
+      "breed": "Fluffy Cat"
+    },
+    {
+      "name": "asasdasd",
+      "description": ""
+    },
+    {
+      "name": "Navcho",
+      "description": "asda"
+    },
+    {
+      "name": "sdasd",
+      "description": "",
+      "breed": "Persian"
+    }
+  ]
+}

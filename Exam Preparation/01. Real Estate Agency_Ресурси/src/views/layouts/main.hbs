@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Do not forget to change the path to the css file -->
+    <title>Home Page</title>
+    <link href="/static/css/style.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="box">
+
+    <!-- In case of error, you should display div with class "errorContainer" -->
+    <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
+
+
+        {{#each errors}}
+            <div>
+                <div class="errorContainer">
+                    <p>{{this}}</p>
+                </div>
+            </div>
+        {{/each}}
+
+    <nav>
+        <a href="/">Home</a>
+        <ul>
+            <!-- Guest users and Logged users -->
+            <li><a href="/">Housing for rent</a></li>
+            {{#if user}}
+                <!-- Logged users -->
+                <li><a href="/housing/create">Create offer</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+            {{else}}
+                <!-- Guest users -->
+                <li><a href="/auth/login">Login</a></li>
+                <li><a href="/auth/register">Register</a></li>
+            {{/if}}
+
+        </ul>
+    </nav>
+
+    {{{body}}}
+    <footer>
+        © 2021
+    </footer>
+</div>
+</body>
+</html>

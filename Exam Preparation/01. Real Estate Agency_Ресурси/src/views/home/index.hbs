@@ -1,0 +1,29 @@
+<main>
+    <section id="home-page" class="background-image">
+        <div class="home-container">
+
+            <div class="info">
+                <h1>Discover Your Perfect Home</h1>
+                <h2>The Best Real Estate Deals</h2>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="top-houses">
+        <h1>Top Houses</h1>
+        <div class="houses">
+
+            {{#each housings}}
+                {{> housing-card-home}}
+            {{else}}
+                <div class="no-data-listing">
+                    <p class="no-offer">There are no housing offers found...</p>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+</main>
+
+
+

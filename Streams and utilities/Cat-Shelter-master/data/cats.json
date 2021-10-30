@@ -1,0 +1,56 @@
+[
+  {
+    "id": "854988af-d753-4109-82ae-ad2208e67640",
+    "fields": {
+      "name": "Perla",
+      "description": "My favorite cat ever!",
+      "breed": "Street"
+    },
+    "files": {
+      "upload": {
+        "size": 0,
+        "path": "C:\\Users\\PC\\AppData\\Local\\Temp\\upload_5ebdd35df0e4f33487e50bdd1717c08e",
+        "name": "",
+        "type": "application/octet-stream",
+        "mtime": null
+      }
+    },
+    "image": "2.jpg"
+  },
+  {
+    "id": "afeaa21a-cee5-4f59-be8a-ec9e86f806b8",
+    "fields": {
+      "name": "Dolly",
+      "description": "You will love this cat!",
+      "breed": "Street"
+    },
+    "files": {
+      "upload": {
+        "size": 0,
+        "path": "C:\\Users\\PC\\AppData\\Local\\Temp\\upload_306ae6a1ae91d8f0855922b521aea6a6",
+        "name": "",
+        "type": "application/octet-stream",
+        "mtime": null
+      }
+    },
+    "image": "3.jpg"
+  },
+  {
+    "id": "565bac3c-13cc-4362-bc80-d5b2e9ee622e",
+    "fields": {
+      "name": "Bella",
+      "description": "Love you",
+      "breed": "My favorite"
+    },
+    "files": {
+      "upload": {
+        "size": 56803,
+        "path": "C:\\Users\\PC\\AppData\\Local\\Temp\\upload_eab5522c362b45f5ffdb5c1ab76fa6bb",
+        "name": "4.jpg",
+        "type": "image/jpeg",
+        "mtime": "2021-09-20T07:31:56.390Z"
+      }
+    },
+    "image": "4.jpg"
+  }
+]

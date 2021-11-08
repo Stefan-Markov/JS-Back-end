@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const {hash} = require("bcrypt");
 const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -15,7 +14,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        match: [/.+@.+\..+/,'Enter valid email'],
+        match: [/.+@.+\..+/, 'Enter valid email'],
     },
     password: {
         type: String,
@@ -23,7 +22,6 @@ const userSchema = new mongoose.Schema({
         minlength: [4, 'cannot be with less then 4 characters'],
     },
 });
-
 
 
 userSchema.pre('save', function (next) {
@@ -38,7 +36,6 @@ userSchema.pre('save', function (next) {
 userSchema.method('validatePassword', function (password) {
     return bcrypt.compare(password, this.password);
 });
-
 
 
 const User = mongoose.model('User', userSchema);

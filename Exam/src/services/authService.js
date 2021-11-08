@@ -7,9 +7,12 @@ exports.register = (userData) => User.create(userData);
 
 exports.login = async function ({email, password}) {
     let user = await User.findOne({email});
+    if (!user) {
+        throw new Error('Enter valid credentials.')
+    }
     let isValid = await user.validatePassword(password);
 
-    if (!user || !isValid) {
+    if (!isValid) {
         throw new Error('Enter valid credentials.')
     }
     let payload = {
@@ -18,6 +21,14 @@ exports.login = async function ({email, password}) {
     };
 
     return await jwt.signPromisify(payload, SECRET);
+}
+
+exports.userData =  function (req, res) {
+    if (req.user) {
+        let {_id, email} =  req.user;
+        return {_id, email};
+    }
+    return null;
 }
 
 exports.findById = (id) => User.findById(id).lean();

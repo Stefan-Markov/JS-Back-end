@@ -14,21 +14,18 @@ router.get('/login', isGuest, (req, res) => {
 });
 
 router.post('/login', isGuest, async (req, res) => {
-    const {email, password} = req.body;
-
-    if (!email || !password) {
-        res.locals.erros = 'Invalid info';
-        return res.render('auth/login');
-    }
-
     try {
+        const {email, password} = req.body;
+        if (!email || !password) {
+            throw new Error('Invalid info');
+        }
+
 
         let token = await authService.login({email, password});
-        res.cookie(TOKEN, token);
+        res.cookie(TOKEN, token, {httpOnly: true});
         res.redirect('/');
     } catch (errors) {
-        console.log(errors)
-        res.locals.errors = Array.of(getErrorMessage(errors));
+        res.locals.errors = Array.of(errors.message);
         return res.render('auth/login');
     }
 })
@@ -44,8 +41,8 @@ router.post('/register', isGuest, async (req, res) => {
     try {
         await authService.register({firstName, lastName, email, password});
 
-        // let token = await authService.login({email, password});
-        // res.cookie(TOKEN, token);
+        let token = await authService.login({email, password});
+        res.cookie(TOKEN, token);
         res.redirect('/');
     } catch (errors) {
         res.locals.errors = [getErrorMessage(errors)];

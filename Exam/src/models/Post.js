@@ -1,25 +1,27 @@
 const mongoose = require('mongoose');
+const bcrypt = require("bcrypt");
 
 const postSchema = new mongoose.Schema({
 
     title: {
         type: String,
         required: true,
-        minlength: [6,'min 6'],
+        minlength: [3, 'min 3 title'],
     },
     keyword: {
         type: String,
         required: true,
-        minlength: [6,'min 6'],
+        minlength: [3, 'min 3 keyword'],
     },
     location: {
         type: String,
         required: true,
-        minlength: [6,'min 10'],
+        minlength: [3, 'min 3 location'],
     },
     dateOfCreation: {
         type: String,
         required: true,
+        validate: [/(\d{2}.)(\d{2}.)(\d{4})/, 'enter valid date of creation']
     },
     image: {
         type: String,
@@ -29,7 +31,7 @@ const postSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-        minlength: [8,'min 8'],
+        minlength: [3, 'min 3 description'],
     },
     author: {
         type: mongoose.Types.ObjectId,
@@ -45,9 +47,11 @@ const postSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     }
-
 });
 
+postSchema.method('getUsers', function () {
+    return this.votes.map(x => x.email).join(', ');
+});
 
 const Post = mongoose.model('Post', postSchema);
 

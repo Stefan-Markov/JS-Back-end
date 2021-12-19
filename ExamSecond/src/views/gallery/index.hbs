@@ -1,0 +1,30 @@
+<main>
+
+    <section id="gallery">
+        <h1>Gallery</h1>
+        <article class="gallery-container">
+
+            <!--            <article class="card-info">-->
+            <!--                <article class="card-info-image">-->
+            <!--                    <img src="/static/img/img-5.jpg" alt="art-image">-->
+            <!--                </article>-->
+            <!--                <article class="card-info-text">-->
+            <!--                    <h2>Title: Spring in the garden</h2>-->
+            <!--                    <h3>Certificate of authenticity: Yes</h3>-->
+            <!--                    <a href="#" class="details-btn">Details</a>-->
+            <!--                </article>-->
+            <!--            </article>-->
+
+            {{#each publications}}
+                {{> galleryAll}}
+            {{else}}
+                <article class="no-available-publications">
+                    <h1>No publications created yet.</h1>
+                    <a href="/gallery/create" class="create-pub">Create publication</a>
+                </article>
+            {{/each}}
+
+        </article>
+    </section>
+
+</main>

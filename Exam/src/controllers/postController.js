@@ -20,7 +20,6 @@ router.post('/create', isAuth, async (req, res) => {
         res.locals.errors = Array.of(getErrorMessage(err));
         res.render('post/create');
     }
-
 });
 
 router.get('/all', async (req, res) => {
@@ -34,15 +33,14 @@ router.get('/all', async (req, res) => {
 router.get('/details/:postId', async (req, res) => {
     let post = await postService.getOneById(req.params.postId);
     // let data = authService.userData(req, res);
+    let email = req.user.email;
 
     let userVoted = await postService.findByIdUsersVoted(req.params.postId);
     // let users = userVoted.votes.map(x => x.email).join(', ');
-
     let users = userVoted.getUsers();
 
     let votes = post.votes;
     let isVoted = votes.some(x => x._id == req.user?._id);
-    let rating = post.rating;
 
     let userOwner = await authService.findById(post.author);
     let firstName = userOwner.firstName;
@@ -51,7 +49,7 @@ router.get('/details/:postId', async (req, res) => {
     let owner = post.author._id.toString() === req.user?._id;
     let notOwner = post.author._id.toString() !== req.user?._id;
 
-    res.render('post/details', {...post, firstName, lastName, owner, notOwner, isVoted, users, rating});
+    res.render('post/details', {...post, firstName, lastName, owner, notOwner, isVoted, users,email});
 });
 
 router.get('/voteup/:id', isAuth, async (req, res) => {
@@ -73,12 +71,12 @@ router.get('/votedown/:id', isAuth, async (req, res) => {
 router.get('/edit/:postId', isOwner, async (req, res) => {
     let post = await postService.getOneById(req.params.postId);
 
-    let data = authService.userData(req, res);
-
-    res.render('post/edit', {...post, ...data});
+    // let data = authService.userData(req, res);
+    let email = req.user.email;
+    res.render('post/edit', {...post,email});
 });
 
-router.post('/edit/:postId', isAuth, isOwner, async (req, res) => {
+router.post('/edit/:postId', isOwner, async (req, res) => {
     let {title, keyword, location, dateOfCreation, image, description} = req.body;
     let data = {title, keyword, location, dateOfCreation, image, description};
     try {
@@ -113,9 +111,8 @@ router.get('/my-post/:userId', isAuth, async (req, res) => {
 
 
 async function isOwner(req, res, next) {
-
     let post = await postService.getOneById(req.params.postId);
-    if (post.author._id.toString() === req.user._id) {
+    if (post?.author._id.toString() === req.user?._id) {
         next();
     } else {
         res.redirect('/');
@@ -124,8 +121,7 @@ async function isOwner(req, res, next) {
 
 async function isNotOwner(req, res, next) {
     let post = await postService.getOneById(req.params.postId);
-
-    if (post.author._id.toString() !== req.user._id) {
+    if (post.author._id.toString() !== req.user?._id) {
         next();
     } else {
         res.redirect('/');

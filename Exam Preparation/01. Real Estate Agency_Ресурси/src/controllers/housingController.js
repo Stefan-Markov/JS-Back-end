@@ -77,7 +77,6 @@ router.post('/:housingId/edit', isOwner, async (req, res) => {
 });
 
 async function isOwner(req, res, next) {
-
     let housing = await housingService.getOne(req.params.housingId);
 
     if (housing.owner.toString() === req.user._id) {

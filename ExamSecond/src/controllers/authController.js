@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const authService = require('../services/authService');
+const authService = require('../service/authService');
 const {isGuest, isAuth} = require("../middlewares/authMiddleware");
 const {getErrorMessage} = require("../utils/errorMessage");
 const TOKEN = 'token';
@@ -15,13 +15,13 @@ router.get('/login', isGuest, (req, res) => {
 
 router.post('/login', isGuest, async (req, res) => {
     try {
-        const {emaiusel, password} = req.body;
-        if (!email || !password) {
+        const {username, password} = req.body;
+        if (!username || !password) {
             throw new Error('Invalid info');
         }
 
 
-        let token = await authService.login({email, password});
+        let token = await authService.login({username, password});
         res.cookie(TOKEN, token, {httpOnly: true});
         res.redirect('/');
     } catch (errors) {
@@ -31,17 +31,18 @@ router.post('/login', isGuest, async (req, res) => {
 });
 
 router.post('/register', isGuest, async (req, res) => {
-    const {firstName, lastName, email, password, repeatPassword} = req.body;
+    const {username, address, password, repassword} = req.body;
 
-    if (password !== repeatPassword) {
+
+    if (password !== repassword) {
         res.locals.errors = ['Password dont match'];
         return res.render('auth/register');
     }
 
     try {
-        await authService.register({firstName, lastName, email, password});
+        await authService.register({username, address, password});
 
-        let token = await authService.login({email, password});
+        let token = await authService.login({username, password});
         res.cookie(TOKEN, token);
         res.redirect('/');
     } catch (errors) {

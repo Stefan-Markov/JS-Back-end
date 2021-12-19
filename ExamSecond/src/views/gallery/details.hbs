@@ -1,0 +1,40 @@
+<main>
+    <section id="details-page">
+        <h1>Details</h1>
+        <article class="details-card">
+
+            <article class="details-card-text">
+                <h2>Title:<br> {{title}}</h2>
+                <h3>Author: {{author.username}}</h3>
+                <h3>Painting {{technique}}</h3>
+                <h3>Certificate of authenticity: {{certificate}}</h3>
+
+                <!-- If there is no registered user, do not display buttons-->
+                {{#if user}}
+                    <div class="buttons">
+                        {{#if owner}}
+                            <!-- Only for registered user and author of the publication -->
+                            <a href="/gallery/edit/{{_id}}" class="btn-edit">Edit</a>
+                            <a href="/gallery/remove/{{_id}}" class="btn-delete">Delete</a>
+                        {{/if}}
+                        {{#if notOwner}}
+                            {{#if isShared}}
+                                <!-- logged in user who has not yet shared the publication-->
+
+                                <p class="shared-pub">You already shared this publication</p>
+                            {{else}}
+                                <!-- logged in user who has already shared the publication-->
+                                <a href="/gallery/share/{{_id}}" class="btn-share">Share publication</a>
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                {{/if}}
+            </article>
+
+            <article class="details-card-image">
+                <img src="{{picture}}" alt="art-image2">
+            </article>
+
+        </article>
+    </section>
+</main>
